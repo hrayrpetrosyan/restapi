@@ -5,6 +5,8 @@ const path = require('path');
 const multer = require('multer');
 const uuidv4 = require('uuid/v4');
 
+require('dotenv').config();
+
 const feedRoutes = require('./routes/feed');
 const authRoutes = require('./routes/auth');
 
@@ -58,7 +60,7 @@ app.use((error, req, res, next) => {
 
 mongoose
     .connect(
-        'mongodb+srv://Hrayr:1gohardlikePutin!@cluster0-dl25r.mongodb.net/messages?retryWrites=true'
+        `mongodb+srv://${process.env.DB_PROJECT}:${process.env.DB_PASS}@cluster0-dl25r.mongodb.net/messages?retryWrites=true`
     )
     .then(res => {
         const server = app.listen(8080);
